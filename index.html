@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skill Swap</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="skillswap-functions.js" defer></script>
     <script src="script.js" defer></script>
 </head>
 <body>
@@ -31,6 +32,15 @@
             <!-- AI-assisted sample skill cards, created with ChatGPT assistance. -->
 <p>Sample tutor listings for this student project.</p>
 
+<div class="filter-buttons" aria-label="Filter skills by category">
+    <button type="button" data-category="All">All</button>
+    <button type="button" data-category="Programming">Programming</button>
+    <button type="button" data-category="Music">Music</button>
+    <button type="button" data-category="Career">Career</button>
+    <button type="button" data-category="Education">Education</button>
+    <button type="button" data-category="Languages">Languages</button>
+</div>
+<p id="filter-message" role="status"></p>
 <div class="skill-grid">
     <article class="skill-card">
         <h3>Python Basics</h3>
