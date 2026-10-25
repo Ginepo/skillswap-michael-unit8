@@ -43,3 +43,29 @@ describe('calculateTotalCosts', () => {
     expect(calculateTotalCosts(25, 1.5)).toBe(37.5);
   });
 });
+
+describe('matchSkillsToUser', () => {
+  const { matchSkillsToUser } = require('../skillswap-functions');
+
+  test('matches category and budget', () => {
+    const needs = { category: 'Programming', maxPrice: 30 };
+    expect(matchSkillsToUser(needs, skills)).toEqual([
+      skills[0], skills[3]
+    ]);
+  });
+
+  test('includes the maximum price and excludes higher prices', () => {
+    const needs = { category: 'Programming', maxPrice: 20 };
+    expect(matchSkillsToUser(needs, skills)).toEqual([skills[0]]);
+  });
+
+  test('returns an empty array when no skills match', () => {
+    const needs = { category: 'Cooking', maxPrice: 100 };
+    expect(matchSkillsToUser(needs, skills)).toEqual([]);
+  });
+
+  test('includes free skills with a zero budget', () => {
+    const needs = { category: 'Career', maxPrice: 0 };
+    expect(matchSkillsToUser(needs, skills)).toEqual([skills[2]]);
+  });
+});
