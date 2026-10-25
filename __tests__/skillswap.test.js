@@ -1,6 +1,4 @@
-const {
-  filterSkillsByCategory
-} = require('../skillswap-functions');
+const { filterSkillsByCategory } = require('../skillswap-functions');
 
 const skills = [
   { title: 'Python Tutoring', category: 'Programming', price: 20 },
@@ -12,8 +10,7 @@ const skills = [
 describe('filterSkillsByCategory', () => {
   test('filters skills by category', () => {
     expect(filterSkillsByCategory(skills, 'Programming')).toEqual([
-      skills[0],
-      skills[3]
+      skills[0], skills[3]
     ]);
   });
 
