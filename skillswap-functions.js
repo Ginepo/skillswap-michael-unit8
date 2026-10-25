@@ -17,3 +17,14 @@ function calculateTotalCosts(hourlyRate, hours) {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports.calculateTotalCosts = calculateTotalCosts;
 }
+
+function matchSkillsToUser(userNeeds, skills) {
+  return skills.filter(skill =>
+    skill.category === userNeeds.category &&
+    skill.price <= userNeeds.maxPrice
+  );
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports.matchSkillsToUser = matchSkillsToUser;
+}
