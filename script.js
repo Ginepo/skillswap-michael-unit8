@@ -103,3 +103,58 @@ document.getElementById('cost-form').addEventListener('submit', event => {
   document.getElementById('cost-result').textContent =
     `Total cost: $${total.toFixed(2)}`;
 });
+
+const matchSection = document.createElement('section');
+matchSection.id = 'matcher';
+matchSection.innerHTML = `
+  <h2>Find My Match</h2>
+  <form id="match-form">
+    <p>
+      <label for="match-category">Category</label>
+      <select id="match-category">
+        <option>Programming</option>
+        <option>Music</option>
+        <option>Career</option>
+        <option>Education</option>
+        <option>Languages</option>
+      </select>
+    </p>
+    <p>
+      <label for="match-budget">Maximum hourly price ($)</label>
+      <input id="match-budget" type="number" min="0"
+             step="0.01" required>
+    </p>
+    <button type="submit">Find My Match</button>
+  </form>
+  <div id="match-results" role="status"></div>
+`;
+
+document.querySelector('main').insertBefore(
+  matchSection,
+  document.getElementById('offer')
+);
+
+document.getElementById('match-form').addEventListener('submit', event => {
+  event.preventDefault();
+
+  const needs = {
+    category: document.getElementById('match-category').value,
+    maxPrice: Number(document.getElementById('match-budget').value)
+  };
+
+  const matches = matchSkillsToUser(needs, skills);
+  const results = document.getElementById('match-results');
+  results.replaceChildren();
+
+  if (matches.length === 0) {
+    results.textContent = 'No skills match your category and budget.';
+    return;
+  }
+
+  matches.forEach(skill => {
+    const item = document.createElement('p');
+    const price = skill.price === 0 ? 'Free' : `$${skill.price}/hour`;
+    item.textContent = `${skill.title} - ${price}`;
+    results.appendChild(item);
+  });
+});
