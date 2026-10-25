@@ -69,3 +69,37 @@ filterButtons.forEach(button => {
       `${matches.length} skill(s) found.`;
   });
 });
+
+const calculatorSection = document.createElement('section');
+calculatorSection.id = 'calculator';
+calculatorSection.innerHTML = `
+  <h2>Session Cost Calculator</h2>
+  <form id="cost-form">
+    <p>
+      <label for="hourly-rate">Hourly rate ($)</label>
+      <input id="hourly-rate" type="number" min="0" step="0.01" required>
+    </p>
+    <p>
+      <label for="session-hours">Hours</label>
+      <input id="session-hours" type="number" min="0" step="0.01" required>
+    </p>
+    <button type="submit">Calculate Cost</button>
+  </form>
+  <p id="cost-result" role="status"></p>
+`;
+
+document.querySelector('main').insertBefore(
+  calculatorSection,
+  document.getElementById('offer')
+);
+
+document.getElementById('cost-form').addEventListener('submit', event => {
+  event.preventDefault();
+
+  const rate = Number(document.getElementById('hourly-rate').value);
+  const hours = Number(document.getElementById('session-hours').value);
+  const total = calculateTotalCosts(rate, hours);
+
+  document.getElementById('cost-result').textContent =
+    `Total cost: $${total.toFixed(2)}`;
+});

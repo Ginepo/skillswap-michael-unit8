@@ -9,3 +9,11 @@ function filterSkillsByCategory(skills, category) {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { filterSkillsByCategory };
 }
+
+function calculateTotalCosts(hourlyRate, hours) {
+  return hourlyRate * hours;
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports.calculateTotalCosts = calculateTotalCosts;
+}
